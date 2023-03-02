@@ -12,7 +12,8 @@ def para_one_hot(msg):
     char_list.extend(numbers)
     char_list.append(' ')
 
-    dict_char = {char_list[i]: i for i in range(len(char_list))}
+    dict_char = {str(char_list[i]): i for i in range(len(char_list))}
+    print(dict_char)
 
     for i in range(len(msg)):
         M[dict_char[msg[i]], i] = 1
@@ -25,7 +26,7 @@ def para_string(M: np.array):
     numbers = list(range(10))
     char_list.extend(numbers)
     char_list.append(' ')
-    dict_char = {i: char_list[i] for i in range(len(char_list))}
+    dict_char = {i: str(char_list[i]) for i in range(len(char_list))}
 
     msg = ''
     for i in range(M.shape[1]):
