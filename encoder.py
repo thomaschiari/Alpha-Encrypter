@@ -2,8 +2,8 @@ import numpy as np
 import unidecode
 import string
 
-def para_one_hot(msg):
 
+def para_one_hot(msg):
     M = np.zeros((37, len(msg)))
     msg = msg.lower()
     msg = unidecode.unidecode(msg)
@@ -18,6 +18,7 @@ def para_one_hot(msg):
         M[dict_char[msg[i]], i] = 1
 
     return M
+
 
 def para_string(M: np.array):
     char_list = list(string.ascii_lowercase)
