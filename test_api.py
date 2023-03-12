@@ -5,7 +5,7 @@ import numpy as np
 
 url_enigma = 'http://localhost:5000/api/enigma'
 url_de_enigma = 'http://localhost:5000/api/de_enigma'
-.
+
 msg = "hello world"
 
 response_enigma = requests.post(url_enigma, json={'msg': msg})
