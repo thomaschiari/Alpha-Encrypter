@@ -3,7 +3,7 @@ from flask import request, jsonify
 import numpy as np
 import json
 import string
-from encoder_func import *
+from AlphaEncrypter import *
 import flask_cors
 
 app = flask.Flask(__name__)
