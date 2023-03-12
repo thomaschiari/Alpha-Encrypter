@@ -51,7 +51,7 @@ def enigma(msg: str, P: np.array, E: np.array) -> str:
     msg_cifrada = para_one_hot(msg_cifrada)
     msg_cifrada = E @ msg_cifrada
     msg_cifrada = para_string(msg_cifrada)
-    return msg_cifrada
+    return msg_cifrada, P, E
 
 def de_enigma(msg: str, P: np.array, E: np.array) -> str:
     msg_decifrada = ""
