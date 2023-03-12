@@ -4,7 +4,7 @@ import string
 import copy
 
 
-def para_one_hot(msg):
+def para_one_hot(msg: str) -> np.array:
     if isinstance(msg, np.ndarray):
         M = msg
     else:
@@ -21,7 +21,7 @@ def para_one_hot(msg):
     return M
 
 
-def para_string(M: np.array):
+def para_string(M: np.array) -> np.array:
     char_list = list(string.ascii_lowercase)
     numbers = list(range(10))
     char_list.extend(numbers)
@@ -32,17 +32,17 @@ def para_string(M: np.array):
         msg += dict_char[np.argmax(M[:, i])]
     return msg
 
-def cifrar(msg, P):
+def cifrar(msg: str, P: np.array) -> str:
     M = para_one_hot(msg)
     MC = P @ M
     return para_string(MC)
 
-def de_cifrar(msg, P):
+def de_cifrar(msg: str, P: np.array) -> np.array:
     M = para_one_hot(msg)
     MP = np.linalg.inv(P) @ M
     return MP
 
-def enigma(msg, P, E):
+def enigma(msg: str, P: np.array, E: np.array) -> str:
     msg_cifrada = ""
     i = 0
     while i < len(msg):
@@ -53,7 +53,7 @@ def enigma(msg, P, E):
     msg_cifrada = para_string(msg_cifrada)
     return msg_cifrada
 
-def de_enigma(msg, P, E):
+def de_enigma(msg: str, P: np.array, E: np.array) -> str:
     msg_decifrada = ""
     i = 0
     while i < len(msg):
