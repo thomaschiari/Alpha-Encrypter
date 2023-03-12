@@ -5,17 +5,21 @@ import copy
 
 
 def para_one_hot(msg):
-    M = np.zeros((37, len(msg)))
-    msg = msg.lower()
-    msg = unidecode.unidecode(msg)
-    char_list = list(string.ascii_lowercase)
-    numbers = list(range(10))
-    char_list.extend(numbers)
-    char_list.append(' ')
-    dict_char = {str(char_list[i]): i for i in range(len(char_list))}
-    for i in range(len(msg)):
-        M[dict_char[msg[i]], i] = 1
+    if isinstance(msg, np.ndarray):
+        M = msg
+    else:
+        M = np.zeros((37, len(msg)))
+        msg = msg.lower()
+        msg = unidecode.unidecode(msg)
+        char_list = list(string.ascii_lowercase)
+        numbers = list(range(10))
+        char_list.extend(numbers)
+        char_list.append(' ')
+        dict_char = {str(char_list[i]): i for i in range(len(char_list))}
+        for i in range(len(msg)):
+            M[dict_char[msg[i]], i] = 1
     return M
+
 
 def para_string(M: np.array):
     char_list = list(string.ascii_lowercase)
@@ -36,31 +40,26 @@ def cifrar(msg, P):
 def de_cifrar(msg, P):
     M = para_one_hot(msg)
     MP = np.linalg.inv(P) @ M
-    return para_string(MP)
+    return MP
 
 def enigma(msg, P, E):
-    M = para_one_hot(msg)
-    PC = P @ E
-    MC = PC @ M
-    return para_string(MC)
+    msg_cifrada = ""
+    i = 0
+    while i < len(msg):
+        msg_cifrada += cifrar(msg[i:i+37], P)
+        i += 37
+    msg_cifrada = para_one_hot(msg_cifrada)
+    msg_cifrada = E @ msg_cifrada
+    msg_cifrada = para_string(msg_cifrada)
+    return msg_cifrada
 
 def de_enigma(msg, P, E):
-    M = para_one_hot(msg)
-    PP = np.linalg.inv(E) @ P
-    MP = np.linalg.inv(PP) @ M
-    return para_string(MP)
-
-n = 37
-P = np.eye(n)
-np.random.shuffle(P)
-E = copy.deepcopy(P)
-np.random.shuffle(E)
-
-
-print(de_cifrar(cifrar('hello world', P), P))
-
-enigma = enigma('hello world', P, E)
-print(enigma)
-
-deenigma = de_enigma(enigma, P, E)
-print(deenigma)
+    msg_decifrada = ""
+    i = 0
+    while i < len(msg):
+        msg_decifrada += cifrar(msg[i:i+37], np.linalg.inv(E))
+        i += 37
+    msg_decifrada = para_one_hot(msg_decifrada)
+    msg_decifrada = np.linalg.inv(P) @ msg_decifrada
+    msg_decifrada = para_string(msg_decifrada)
+    return msg_decifrada
