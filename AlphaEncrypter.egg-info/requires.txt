@@ -1,0 +1,6 @@
+pip
+requests
+numpy
+flask
+setuptools
+unidecode
