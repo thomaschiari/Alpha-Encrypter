@@ -3,7 +3,7 @@ from flask import request, jsonify
 import numpy as np
 import json
 import string
-from AlphaEncrypter import *
+from AlphaEncrypter.AlphaEncrypter import *
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True

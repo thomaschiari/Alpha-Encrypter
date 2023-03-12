@@ -1,5 +1,6 @@
 import time
 import numpy as np
+from AlphaEncrypter.AlphaEncrypter import *
 
 def slow_print(text):
     for char in text:
@@ -47,8 +48,6 @@ slow_print("In this case, the keys will be randomly generated, but you can use y
 slow_print("Note that the keys are permutations of the identity matrix.")
 slow_print("Now, we will encode the message.")
 slow_print("For that, we will call the Enigma function from the AlphaEncoder module, and use the permutation matrixes.")
-
-from AlphaEncrypter import enigma, de_enigma
 
 encoded_message = enigma(message, P, E)[0]
 
