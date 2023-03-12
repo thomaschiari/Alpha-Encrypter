@@ -1,0 +1,6 @@
+README.md
+setup.py
+AlphaEncrypter.egg-info/PKG-INFO
+AlphaEncrypter.egg-info/SOURCES.txt
+AlphaEncrypter.egg-info/dependency_links.txt
+AlphaEncrypter.egg-info/top_level.txt
