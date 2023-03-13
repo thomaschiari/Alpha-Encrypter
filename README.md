@@ -91,6 +91,8 @@ The Enigma Algorithm adds another step: at every character of the message, the p
 
 After that process, the program will use the One-Hot Encoding algorithm to turn the result of all those permutations into a string in order to return the encrypted message.
 
+The ```de_enigma``` function will follow the opposite shuffling process, and will return the original message.
+
 
 
 ---
