@@ -22,7 +22,7 @@ source env/bin/activate
 ```
 
 ```bash
-pip install AlphaEncrypter
+pip install git+https://github.com/thomaschiari/Algebra-Linear-Enigma.git
 ```
 
 To check that the installation was successful, you can run the following command:
@@ -128,11 +128,11 @@ The ```de_enigma``` function will follow the opposite shuffling process, and wil
   POST /api/de_enigma
 ```
 
-| Parameter | Type     | Description                                                |
-| :-------- | :------- |:-----------------------------------------------------------|
-| `msg`     | `string` | **Required**. Mensagem cryptografada                       |
-| `P`       | `list`   | **Required**. Matriz P utilizada para encriptar a mensagem |
-| `E`       | `list`   | **Required**. Matriz E utilizada para encriptar a mensagem |
+| Parameter     | Type     | Description                                                |
+|:--------------| :------- |:-----------------------------------------------------------|
+| `msg_cifrada` | `string` | **Required**. Mensagem cryptografada                       |
+| `P`           | `list`   | **Required**. Matriz P utilizada para encriptar a mensagem |
+| `E`           | `list`   | **Required**. Matriz E utilizada para encriptar a mensagem |
 
 ### Run Locally
 
@@ -158,4 +158,6 @@ In order to test the API, you can use the script ```test_api.py```. You can also
 ```bash
 python test_api.py
 ```
+
+You can also test the API using a program like Postman. Just remember to use the correct URL and the correct parameters. For that, use the *POST* Method and add on the body of the request a JSON containing the variables named above. If you are using a randomly generated key, remember to copy and save it somewhere, as you will need it to decrypt the message.
 
