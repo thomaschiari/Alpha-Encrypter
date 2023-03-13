@@ -9,19 +9,22 @@ def slow_print(text):
     print()
 
 print("""\
-                _ ___                /^^\ /^\  /^^\_
-    _          _@)@) \            ,,/ '` ~ `'~~ ', `\.
-  _/o\_ _ _ _/~`.`...'~\        ./~~..,'`','',.,' '  ~:
- / `,'.~,~.~  .   , . , ~|,   ,/ .,' , ,. .. ,,.   `,  ~\_
-( ' _' _ '_` _  '  .    , `\_/ .' ..' '  `  `   `..  `,   \_
- ~V~ V~ V~ V~ ~\ `   ' .  '    , ' .,.,''`.,.''`.,.``. ',   \_
-  _/\ /\ /\ /\_/, . ' ,   `_/~\_ .' .,. ,, , _/~\_ `. `. '.,  \_
- < ~ ~ '~`'~'`, .,  .   `_: ::: \_ '      `_/ ::: \_ `.,' . ',  \_
-  \ ' `_  '`_    _    ',/ _::_::_ \ _    _/ _::_::_ \   `.,'.,`., \-,-,-,_,_,
-   `'~~ `'~~ `'~~ `'~~  \(_)(_)(_)/  `~~' \(_)(_)(_)/ ~'`\_.._,._,'_;_;_;_;_;
+           _       _                              
+     /\   | |     | |                             
+    /  \  | |_ __ | |__   __ _                    
+   / /\ \ | | '_ \| '_ \ / _` |                   
+  / ____ \| | |_) | | | | (_| |                   
+ /_/____\_\_| .__/|_| |_|\__,_|      _            
+ |  ____|   | |                     | |           
+ | |__   _ _|_| ___ _ __ _   _ _ __ | |_ ___ _ __ 
+ |  __| | '_ \ / __| '__| | | | '_ \| __/ _ \ '__|
+ | |____| | | | (__| |  | |_| | |_) | ||  __/ |   
+ |______|_| |_|\___|_|   \__, | .__/ \__\___|_|   
+                          __/ | |                 
+                         |___/|_|                 
 """)
 
-slow_print('Welcome to the Demo of AlphaEncoder Project!')
+slow_print('Welcome to the Demo of AlphaEncrypter Project!')
 slow_print('This is a project that encodes and decodes text using the Enigma algorithm in order do encode and decode a message.')
 slow_print('It uses matrixes and permutations to encode and decode the message.')
 slow_print('Authors: Thomas Chiari Ciocchetti de Souza and Marcelo Rabello Barranco')
@@ -44,10 +47,10 @@ print(P)
 print("E = ")
 print(E)
 
-slow_print("In this case, the keys will be randomly generated, but you can use your own keys using the AlphaEncoder API.")
+slow_print("In this case, the keys will be randomly generated, but you can use your own keys using the AlphaEncrypter API.")
 slow_print("Note that the keys are permutations of the identity matrix.")
 slow_print("Now, we will encode the message.")
-slow_print("For that, we will call the Enigma function from the AlphaEncoder module, and use the permutation matrixes.")
+slow_print("For that, we will call the Enigma function from the AlphaEncrypter module, and use the permutation matrixes.")
 
 encoded_message = enigma(message, P, E)[0]
 
@@ -56,7 +59,7 @@ print(encoded_message)
 print("")
 
 slow_print("Now, we will decode the message.")
-slow_print("For that, we will call the De_Enigma function from the AlphaEncoder module, and use the permutation matrixes.")
+slow_print("For that, we will call the De_Enigma function from the AlphaEncrypter module, and use the permutation matrixes.")
 slow_print("The keys are the same as before, otherwise the message would not be decoded.")
 slow_print("The decoded message is:")
 
@@ -65,5 +68,5 @@ print(decoded_message)
 print("")
 
 slow_print("As you can see, the message was encoded and decoded successfully.")
-slow_print("Thank you for using the AlphaEncoder Project!")
+slow_print("Thank you for using the AlphaEncrypter Project!")
 slow_print("For more information, please visit the GitHub repository: https://github.com/thomaschiari/Algebra-Linear-Enigma")

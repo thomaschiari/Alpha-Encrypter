@@ -8,6 +8,7 @@ from AlphaEncrypter.AlphaEncrypter import *
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
+# Rota para utilizar função Enigma com chaves aleatórias
 @app.route('/api/enigma', methods=['POST'])
 def enigma_route():
     data = request.json
@@ -22,6 +23,20 @@ def enigma_route():
     return jsonify({'msg_cifrada': msg_cifrada,
                     'P': P.tolist(),
                     'E': E.tolist()})
+
+# Rota para utilizar função Enigma com chaves previamente criadas pelo usuário
+@app.route('/api/enigma_keys', methods=['POST'])
+def enigma_keys_route():
+    data = request.json
+    msg = data.get('msg')
+    P = np.array(data.get('P'))
+    E = np.array(data.get('E'))
+
+    # Chama a função enigma com os parâmetros recebidos
+    msg_cifrada = enigma(msg, P, E)[0]
+
+    # Retorna o resultado como JSON
+    return jsonify({'msg_cifrada': msg_cifrada})
 
 @app.route('/api/de_enigma', methods=['POST'])
 def de_enigma_route():
