@@ -39,47 +39,39 @@ def cifrar(msg: str, P: np.array) -> str:
     return para_string(MC)  # converte a matriz criptografada em uma string de mensagem
 
 # descriptografa uma mensagem criptografada utilizando uma matriz de permutação inversa de P
-def de_cifrar(msg: str, P: np.array) -> np.array:
+def de_cifrar(msg: str, P: np.array) -> str:
     M = para_one_hot(msg)  # converte a mensagem criptografada em uma matriz de one-hot encoding
     MP = np.linalg.inv(P) @ M  # multiplica a matriz inversa de P pela matriz da mensagem criptografada
-    return MP
+    return para_string(MP)  # converte a matriz descriptografada em uma string de mensagem
 
-def enigma(msg: str, P: np.array, E: np.array) -> str:
+# Criptografa uma mensagem utilizando o algoritmo Enigma
+def enigma(msg: str, P: np.array, E: np.array) -> (str, np.array, np.array):
     # Inicializa a mensagem cifrada como uma string vazia
     msg_cifrada = ""
     # Inicializa o índice i como 0
     i = 0
     # Itera enquanto i for menor que o comprimento da mensagem
-    while i < len(msg):
-        # Cifra a porção da mensagem de tamanho 37 com a matriz P
-        msg_cifrada += cifrar(msg[i:i+37], P)
-        # Incrementa i em 37
-        i += 37
-    # Converte a mensagem cifrada em uma matriz one-hot
-    msg_cifrada = para_one_hot(msg_cifrada)
-    # Aplica a matriz de transformação E na mensagem cifrada
-    msg_cifrada = E @ msg_cifrada
-    # Converte a mensagem cifrada em uma string
-    msg_cifrada = para_string(msg_cifrada)
-    # Retorna a mensagem cifrada e as chaves P e E utilizadas
+    for caractere in msg:
+        caractere_enigma = cifrar(caractere, P)
+        # Cifra a porção da mensagem de tamanho 37 com a matriz E e armazena na mensagem cifrada
+        for _ in range(i):
+            caractere_enigma = cifrar(caractere_enigma, E)
+        msg_cifrada += caractere_enigma
+        i += 1
     return msg_cifrada, P, E
 
+# Descriptografa uma mensagem criptografada utilizando o algoritmo Enigma
 def de_enigma(msg: str, P: np.array, E: np.array) -> str:
     # Inicializa a mensagem decifrada como uma string vazia
     msg_decifrada = ""
     # Inicializa o índice i como 0
     i = 0
     # Itera enquanto i for menor que o comprimento da mensagem
-    while i < len(msg):
-        # Decifra a porção da mensagem de tamanho 37 com a matriz inversa de E e armazena na mensagem decifrada
-        msg_decifrada += cifrar(msg[i:i+37], np.linalg.inv(E))
-        # Incrementa i em 37
-        i += 37
-    # Converte a mensagem decifrada em uma matriz one-hot
-    msg_decifrada = para_one_hot(msg_decifrada)
-    # Aplica a matriz inversa de P na mensagem decifrada
-    msg_decifrada = np.linalg.inv(P) @ msg_decifrada
-    # Converte a mensagem decifrada em uma string
-    msg_decifrada = para_string(msg_decifrada)
-    # Retorna a mensagem decifrada
+    for caractere in msg:
+        caractere_enigma = caractere
+        # Decifra a porção da mensagem de tamanho 37 com a matriz E e armazena na mensagem decifrada
+        for _ in range(i):
+            caractere_enigma = de_cifrar(caractere_enigma, E)
+        msg_decifrada += de_cifrar(caractere_enigma, P)
+        i += 1
     return msg_decifrada
