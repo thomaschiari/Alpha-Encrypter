@@ -89,11 +89,29 @@ If the original message was *ABCABC*, the encrypted message will now be *BCABCA*
 
 The Enigma Algorithm adds another step: at every character of the message, the permutation matrix P will be shuffled, as it will be multiplied by the permutation matrix E. The permutation matrix E is also a permutation of the eye matrix, and is called an Auxiliary Cipher.
 
-After that process, the program will use the One-Hot Encoding algorithm to turn the result of all those permutations into a string in order to return the encrypted message.
+In order to do that, the program will use the ```cifrar``` function that is also a part of the package. The program will enter a loop for every character of the message, and the ```cifrar``` function will be called at every iteration twice, shuffling the message using the permutation matrix P and the permutation matrix E.
 
-The ```de_enigma``` function will follow the opposite shuffling process, and will return the original message.
+The ```cifrar``` function works as follows:
 
+```python
+def cifrar(msg: str, P: np.array) -> str:
+    M = para_one_hot(msg)  # converte a mensagem em uma matriz de one-hot encoding
+    MC = P @ M  # multiplica a matriz de permutação P pela matriz da mensagem
+    return para_string(MC) 
+```
 
+It receives the message, encodes it into One-Hot Encoding, multiply it by a permutation matrix and return the result as a string.
+
+After every iteration, the shuffled character will be appended into a string, that will be the encrypted message returned by the function.
+
+The ```de_enigma``` function will follow the opposite shuffling process, and will return the original message. It uses the function ```de_cifrar```, also provided by the package, that works in the same way as the ```cifrar``` function, but inverting the permutation matrix in order to receive the original character. It works as follows:
+
+```python
+def de_cifrar(msg: str, P: np.array) -> str:
+    M = para_one_hot(msg)  # converte a mensagem criptografada em uma matriz de one-hot encoding
+    MP = np.linalg.inv(P) @ M  # multiplica a matriz inversa de P pela matriz da mensagem criptografada
+    return para_string(MP)
+```
 
 ---
 # REST API
